@@ -22,10 +22,7 @@ import butterknife.ButterKnife;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * to handle interaction events.
- * Use the {@link ProductDescriptionFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment to show product details.
  */
 public class ProductDescriptionFragment extends Fragment {
     private static final String ARG_PRODUCT = "ARG_PRODUCT";

@@ -2,9 +2,10 @@ package com.vikram.walmartlabs.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,22 +31,20 @@ import retrofit2.Response;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProductListFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProductListFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment to show a list of products.
  */
 public class ProductListFragment extends Fragment {
 
     private static final String TAG = "ProductListFragment";
 
-    private static final String PAGE_NUM = "PAGE_NUM";
-    private static final String PAGE_COUNT = "PAGE_COUNT";
+    private static final String STATE_PRODUCT = "PRODUCTS";
+    private static final String STATE_RECYCLE_LAYOUT = "RECYCLE_LAYOUT";
 
-    private int pageNum;
-    private int pageCount;
+    private static final int DEFAULT_PAGE_NUM = 1;
+    private static final int DEFAULT_PAGE_COUNT = 30;
+
+    private int pageNum = DEFAULT_PAGE_NUM;
+    private int pageCount = DEFAULT_PAGE_COUNT;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,22 +62,37 @@ public class ProductListFragment extends Fragment {
 
     public ProductListFragment() {}
 
-    public static ProductListFragment newInstance(int pageNum, int pageCount) {
+    public static ProductListFragment newInstance() {
         ProductListFragment fragment = new ProductListFragment();
-        Bundle args = new Bundle();
-        args.putInt(PAGE_NUM, pageNum);
-        args.putInt(PAGE_COUNT, pageCount);
-        fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putParcelable(STATE_RECYCLE_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
+        outState.putParcelableArrayList(STATE_PRODUCT, products);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            products = savedInstanceState.getParcelableArrayList(STATE_PRODUCT);
+            setRecyclerView();
+            Parcelable savedRecyclerViewState = savedInstanceState.getParcelable(STATE_RECYCLE_LAYOUT);
+            recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerViewState);
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            pageNum = getArguments().getInt(PAGE_NUM);
-            pageCount = getArguments().getInt(PAGE_COUNT);
-        }
+        setRetainInstance(true);
+        products = new ArrayList<>();
+        fetchProducts(DEFAULT_PAGE_NUM, DEFAULT_PAGE_COUNT);
     }
 
     @Override
@@ -93,8 +107,6 @@ public class ProductListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        products = new ArrayList<>();
-        fetchProducts(pageNum, pageCount);
         setRecyclerView();
     }
 
