@@ -1,13 +1,29 @@
-package com.vikram.walmartlabs;
+package com.vikram.walmartlabs.model;
+
+import com.google.gson.annotations.SerializedName;
+import com.vikram.walmartlabs.model.Product;
 
 import java.util.List;
 
-public class ProductList {
+public class ProductResponse {
+    @SerializedName("products")
     private List<Product> products;
+    @SerializedName("totalProducts")
     private String totalProducts;
+    @SerializedName("pageNumber")
     private int pageNumber;
+    @SerializedName("pageSize")
     private int pageSize;
+    @SerializedName("statusCode")
     private int statusCode;
+
+    public ProductResponse(List<Product> products, String totalProducts, int pageNumber, int pageSize, int statusCode) {
+        this.products = products;
+        this.totalProducts = totalProducts;
+        this.pageNumber = pageNumber;
+        this.pageSize = pageSize;
+        this.statusCode = statusCode;
+    }
 
     public List<Product> getProducts() {
         return products;

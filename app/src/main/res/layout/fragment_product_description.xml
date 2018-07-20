@@ -1,70 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/productName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product name"
-        android:layout_margin="16dp"
-        android:scrollbarSize="22dp"/>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp">
-
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:rating="4" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/ratingCount"
+            android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="21"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@id/ratingBar" />
-
-        <TextView
-            android:id="@+id/producId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="product id"
+            android:textSize="22dp"
             android:layout_marginLeft="16dp"
-            android:layout_toRightOf="@id/ratingCount" />
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"/>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/productId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:layout_marginLeft="16dp" />
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_margin="16dp"
-        android:layout_gravity="center_horizontal"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
 
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:rating="4" />
 
-    <TextView
-        android:id="@+id/shortDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="short description"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+            <TextView
+                android:id="@+id/ratingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/ratingBar" />
 
-    <TextView
-        android:id="@+id/longDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="long description"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"/>
+        </RelativeLayout>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_margin="16dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/shortDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
+
+        <TextView
+            android:id="@+id/longDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
